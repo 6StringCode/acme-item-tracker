@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 
-const Users = ({ users, createUser, deleteUser })=> {
+const Users = ({ users, things, createUser, deleteUser })=> {
   return (
     <div>
       <h1>Users</h1>
@@ -15,6 +15,18 @@ const Users = ({ users, createUser, deleteUser })=> {
               <li key={ user.id }>
                 { user.name }
                 <button onClick={()=> deleteUser(user)}>x</button>
+                <ul>
+                  { 
+                    things.filter(thing => thing.userId === user.id)
+                      .map(thing => {
+                        return (
+                          <li key={ thing.id }>
+                            { thing.name } ({ thing.ranking })
+                          </li>
+                        );
+                      })
+                  }
+                </ul>
               </li>
             );
           })
@@ -26,7 +38,8 @@ const Users = ({ users, createUser, deleteUser })=> {
 
 const mapStateToProps = (state)=> {
   return {
-    users: state.users
+    users: state.users,
+    things: state.things
   };
 }
 
