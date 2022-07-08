@@ -95,6 +95,16 @@ const init = async()=> {
     const [foo, bar, bazz, quq, fizz] = await Promise.all(
       ['foo', 'bar', 'bazz', 'quq', 'fizz'].map( name => Thing.create({ name }))
     );
+
+      foo.userId = moe.id;
+      bar.userId = lucy.id;
+      bazz.userId = lucy.id;
+
+      await Promise.all([
+        foo.save(),
+        bar.save(),
+        bazz.save()
+    ]);
   }
   catch(ex){
     console.log(ex);

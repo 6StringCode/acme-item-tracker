@@ -25,6 +25,7 @@ const Thing = conn.define('thing', {
   }
 });
 
+Thing.belongsTo(User);
 
 module.exports = {
   conn,

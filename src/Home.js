@@ -22,11 +22,10 @@ const Home = ({ users, things, topRanked })=> {
       </ul>
     </div>
   );
-};
+}; 
 
 const mapSToP = (s)=> {
   const topRank = Math.max(...s.things.map(thing => thing.ranking));
-  console.log(topRank)
   const topRanked = s.things.filter(thing => thing.ranking === topRank);
   return {
     users: s.users,

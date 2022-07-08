@@ -3,16 +3,18 @@ import ThingForm from './ThingForm';
 import { connect } from 'react-redux';
 import axios from 'axios';
 
-const Things = ({ things, deleteThing, changeRanking })=> {
+const Things = ({ things, users, deleteThing, changeRanking })=> {
   return (
     <div>
       <h1>Things</h1>
       <ul>
         {
           things.map( thing => {
+            const user = users.find(user => user.id === thing.userId) || {};
             return (
               <li key={ thing.id }>
                 { thing.name } ({ thing.ranking })
+                owned by { user.name || 'nobody' }
                 <button onClick={()=> changeRanking(thing, 1)}>+</button>
                 <button onClick={()=> changeRanking(thing, -1)}>-</button>
                 <button onClick={()=> deleteThing(thing)}>x</button>
@@ -29,7 +31,8 @@ const Things = ({ things, deleteThing, changeRanking })=> {
 export default connect(
   (state)=> {
     return {
-      things: state.things
+      things: state.things,
+      users: state.users
     }
   },
   (dispatch)=>{
