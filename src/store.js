@@ -7,6 +7,9 @@ const initialState = {
 };
 
 const store = createStore((state = initialState, action)=> { 
+  if(action.type === 'CHANGE_RANKING'){
+    return {...state, things: state.things.map( thing => thing.id !== action.thing.id ? thing : action.thing )};
+  }
   if(action.type === 'DELETE_THING'){
     return {...state, things: state.things.filter( thing => thing.id !== action.thing.id )};
   }
