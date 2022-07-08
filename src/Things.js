@@ -41,7 +41,6 @@ export default connect(
       changeRanking: async(thing, dir)=> {
         thing = {...thing, ranking: thing.ranking + dir}
         thing = (await axios.put(`/api/things/${thing.id}`, thing)).data;
-        console.log(thing)
         dispatch({ type: 'CHANGE_RANKING', thing });
       }
     };

@@ -2,7 +2,7 @@ X- ability to delete a thing
 X- ability to create a user
 X- ability to delete a user
 X- a thing should have ranking which defaults to 1 (display it)
-- add the ability to increase or decrease the ranking of a thing
+X- add the ability to increase or decrease the ranking of a thing
 - the home page should show the thing(s) with the highest ranking
 - a thing can belong to a user and a user can have many things. In seed logic have some of the things belong to users.
 - on the things view display the user who owns it (if they have an owner)
