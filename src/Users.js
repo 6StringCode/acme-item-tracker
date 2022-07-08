@@ -34,7 +34,6 @@ const mapDispatch = (dispatch)=> {
   return {
     createUser: async()=> {
       const user = (await axios.post('/api/users', {name: Math.random()})).data;
-      //const user = (await axios.post('/api/users', {name: Math.random()})).data;
       dispatch({ type: 'CREATE_USER', user });
     },
     deleteUser: async(user)=> {
