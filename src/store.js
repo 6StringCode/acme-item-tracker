@@ -7,7 +7,7 @@ const initialState = {
 };
 
 const store = createStore((state = initialState, action)=> { 
-  if(action.type === 'CHANGE_RANKING'){
+  if(action.type === 'UPDATE_THING'){
     return {...state, things: state.things.map( thing => thing.id !== action.thing.id ? thing : action.thing )};
   }
   if(action.type === 'DELETE_THING'){

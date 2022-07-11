@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React from 'react';
 import { connect } from 'react-redux';
+import { faker } from '@faker-js/faker';
 
 
 const Users = ({ users, things, createUser, deleteUser })=> {
@@ -22,6 +23,7 @@ const Users = ({ users, things, createUser, deleteUser })=> {
                         return (
                           <li key={ thing.id }>
                             { thing.name } ({ thing.ranking })
+                            <button onClick={()=> deleteUser(user)}>x</button>
                           </li>
                         );
                       })
@@ -46,7 +48,7 @@ const mapStateToProps = (state)=> {
 const mapDispatch = (dispatch)=> {
   return {
     createUser: async()=> {
-      const user = (await axios.post('/api/users', {name: Math.random()})).data;
+      const user = (await axios.post('/api/users', {name: faker.name.firstName()})).data;
       dispatch({ type: 'CREATE_USER', user });
     },
     deleteUser: async(user)=> {

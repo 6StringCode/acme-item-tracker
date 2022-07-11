@@ -22,7 +22,9 @@ app.post('/api/things', async(req, res, next)=> {
 
 app.get('/api/things', async(req, res, next)=> {
   try {
-    res.send(await Thing.findAll());
+    res.send(await Thing.findAll({
+      order: [['name']]
+    }));
   }
   catch(ex){
     next(ex);
@@ -42,6 +44,10 @@ app.delete('/api/things/:id', async(req, res, next)=> {
 
 app.put('/api/things/:id', async(req, res, next)=> {
   try {
+    //todo - move this to hook or dispatch
+    if(!req.body.userId){
+      req.body.userId = null;
+    }
     const thing = await Thing.findByPk(req.params.id);
     await thing.update(req.body);
     res.send(thing);
@@ -81,6 +87,10 @@ app.post('/api/users', async(req, res, next)=> {
   }
 });
 
+app.use((err, req, res, next)=> {
+  console.error(err)
+  res.status(500).send(err);
+})
 
 const port = process.env.PORT || 3000;
 
