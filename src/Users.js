@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { faker } from '@faker-js/faker';
 
 
-const Users = ({ users, things, createUser, deleteUser })=> {
+const Users = ({ users, things, createUser, deleteUser, removeThingFrUser })=> {
   return (
     <div>
       <h1>Users</h1>
@@ -23,7 +23,7 @@ const Users = ({ users, things, createUser, deleteUser })=> {
                         return (
                           <li key={ thing.id }>
                             { thing.name } ({ thing.ranking })
-                            <button onClick={()=> deleteUser(user)}>x</button>
+                            <button onClick={()=> removeThingFrUser(thing)}>x</button>
                           </li>
                         );
                       })
@@ -54,6 +54,10 @@ const mapDispatch = (dispatch)=> {
     deleteUser: async(user)=> {
       await axios.delete(`/api/users/${user.id}`);
       dispatch({ type: 'DELETE_USER', user });
+    },
+    removeThingFrUser: async(thing)=> {
+      const updatedThing = (await axios.put(`/api/things/${thing.id}`)).data;
+      dispatch({ type: 'UPDATE_THING', thing: updatedThing });
     }
   }
 }
